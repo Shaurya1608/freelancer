@@ -1,0 +1,104 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* No global colors; components decide their own colors */
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer utilities {
+  .text-balance { text-wrap: balance; }
+}
+
+/* Subtle elevation and transitions */
+:root {
+  --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Page and section reveal animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+    filter: saturate(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: saturate(1);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0 }
+  to { opacity: 1 }
+}
+
+@keyframes float {
+  0% { transform: translateY(0) }
+  50% { transform: translateY(-6px) }
+  100% { transform: translateY(0) }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 700ms var(--ease-smooth), transform 700ms var(--ease-smooth), filter 700ms var(--ease-smooth);
+  filter: saturate(0.9);
+  will-change: opacity, transform, filter;
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+  filter: saturate(1);
+}
+
+/* Page wrapper animations */
+.page-enter {
+  animation: fadeIn 600ms var(--ease-smooth) both;
+}
+
+/* Accent gradient blobs for hero backgrounds */
+.hero-gradient {
+  position: absolute;
+  inset: -20% -10% auto;
+  height: 60%;
+  pointer-events: none;
+  background:
+    radial-gradient(60% 60% at 20% 30%, rgba(59,130,246,0.25), transparent 60%),
+    radial-gradient(40% 40% at 80% 20%, rgba(168,85,247,0.25), transparent 60%),
+    radial-gradient(50% 50% at 50% 80%, rgba(16,185,129,0.22), transparent 60%);
+  filter: blur(40px) saturate(1.2);
+  transform: translateZ(0);
+}
+
+.card-hover {
+  transition: transform 300ms var(--ease-smooth), box-shadow 300ms var(--ease-smooth), background-color 300ms var(--ease-smooth);
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+}
+
+.glass {
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(10px);
+}
+
+.dark .glass {
+  background: rgba(17,24,39,0.6);
+}
+
+/* Focus ring */
+.focus-ring:focus-visible {
+  outline: 2px solid rgba(59,130,246,0.8);
+  outline-offset: 2px;
+  border-radius: 0.5rem;
+}
+
+/* Subtle button press */
+.btn-press:active {
+  transform: translateY(1px);
+}
